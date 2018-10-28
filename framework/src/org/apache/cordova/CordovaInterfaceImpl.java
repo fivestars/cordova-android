@@ -26,6 +26,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Pair;
 
 import org.json.JSONException;
@@ -50,6 +52,8 @@ public class CordovaInterfaceImpl implements CordovaInterface {
     protected int activityResultRequestCode;
     protected boolean activityWasDestroyed = false;
     protected Bundle savedPluginState;
+
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     public CordovaInterfaceImpl(Activity activity) {
         this(activity, Executors.newCachedThreadPool());
@@ -79,6 +83,11 @@ public class CordovaInterfaceImpl implements CordovaInterface {
             activityResultCallback.onActivityResult(activityResultRequestCode, Activity.RESULT_CANCELED, null);
         }
         activityResultCallback = plugin;
+    }
+
+    @Override
+    public void runOnUiThread(Runnable runnable) {
+        handler.post(runnable);
     }
 
     @Override
@@ -231,7 +240,9 @@ public class CordovaInterfaceImpl implements CordovaInterface {
         @SuppressLint("NewApi")
     public void requestPermissions(CordovaPlugin plugin, int requestCode, String [] permissions) {
         int mappedRequestCode = permissionResultCallbacks.registerCallback(plugin, requestCode);
-        getActivity().requestPermissions(permissions, mappedRequestCode);
+        if (activity != null) {
+            activity.requestPermissions(permissions, mappedRequestCode);
+        }
     }
 
     public boolean hasPermission(String permission)

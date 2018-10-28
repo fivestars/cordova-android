@@ -50,6 +50,13 @@ public interface CordovaInterface {
     abstract public void setActivityResultCallback(CordovaPlugin plugin);
 
     /**
+     * Run a piece of code on the UI(main) thread
+     *
+     * @param runnable    The runnable to run on UI thread
+     */
+    abstract public void runOnUiThread(Runnable runnable);
+
+    /**
      * Get the Android activity.
      *
      * If a custom engine lives outside of the Activity's lifecycle the return value may be null.

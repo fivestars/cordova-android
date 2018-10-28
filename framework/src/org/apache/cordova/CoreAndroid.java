@@ -83,7 +83,7 @@ public class CoreAndroid extends CordovaPlugin {
                 // This gets called from JavaScript onCordovaReady to show the webview.
                 // I recommend we change the name of the Message as spinner/stop is not
                 // indicative of what this actually does (shows the webview).
-                cordova.getActivity().runOnUiThread(new Runnable() {
+                cordova.runOnUiThread(new Runnable() {
                     public void run() {
                         webView.getPluginManager().postMessage("spinner", "stop");
                     }
@@ -137,7 +137,7 @@ public class CoreAndroid extends CordovaPlugin {
      * Clear the resource cache.
      */
     public void clearCache() {
-        cordova.getActivity().runOnUiThread(new Runnable() {
+        cordova.runOnUiThread(new Runnable() {
             public void run() {
                 webView.clearCache(true);
             }
@@ -208,7 +208,7 @@ public class CoreAndroid extends CordovaPlugin {
      * Clear page history for the app.
      */
     public void clearHistory() {
-        cordova.getActivity().runOnUiThread(new Runnable() {
+        cordova.runOnUiThread(new Runnable() {
             public void run() {
                 webView.clearHistory();
             }
@@ -220,7 +220,7 @@ public class CoreAndroid extends CordovaPlugin {
      * This is the same as pressing the backbutton on Android device.
      */
     public void backHistory() {
-        cordova.getActivity().runOnUiThread(new Runnable() {
+        cordova.runOnUiThread(new Runnable() {
             public void run() {
                 webView.backHistory();
             }

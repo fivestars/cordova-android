@@ -118,7 +118,7 @@ public class SystemWebViewEngine implements CordovaWebViewEngine {
             }
             @Override
             public void runOnUiThread(Runnable r) {
-                SystemWebViewEngine.this.cordova.getActivity().runOnUiThread(r);
+                SystemWebViewEngine.this.cordova.runOnUiThread(r);
             }
         }));
         nativeToJsMessageQueue.addBridgeMode(new NativeToJsMessageQueue.EvalBridgeMode(this, cordova));

@@ -86,7 +86,7 @@ public class CordovaPlugin {
      *     cordova.getThreadPool().execute(runnable);
      *
      * To run on the UI thread, use:
-     *     cordova.getActivity().runOnUiThread(runnable);
+     *     cordova.runOnUiThread(runnable);
      *
      * @param action          The action to execute.
      * @param rawArgs         The exec() arguments in JSON form.
@@ -105,7 +105,7 @@ public class CordovaPlugin {
      *     cordova.getThreadPool().execute(runnable);
      *
      * To run on the UI thread, use:
-     *     cordova.getActivity().runOnUiThread(runnable);
+     *     cordova.runOnUiThread(runnable);
      *
      * @param action          The action to execute.
      * @param args            The exec() arguments.
@@ -124,7 +124,7 @@ public class CordovaPlugin {
      *     cordova.getThreadPool().execute(runnable);
      *
      * To run on the UI thread, use:
-     *     cordova.getActivity().runOnUiThread(runnable);
+     *     cordova.runOnUiThread(runnable);
      *
      * @param action          The action to execute.
      * @param args            The exec() arguments, wrapped with some Cordova helpers.

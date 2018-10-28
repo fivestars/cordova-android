@@ -178,7 +178,7 @@ public class CordovaWebViewImpl implements CordovaWebView {
 
                 // If timeout, then stop loading and handle error
                 if (loadUrlTimeout == currentLoadUrlTimeout) {
-                    cordova.getActivity().runOnUiThread(loadError);
+                    cordova.runOnUiThread(loadError);
                 }
             }
         };
@@ -236,7 +236,7 @@ public class CordovaWebViewImpl implements CordovaWebView {
             } else {
                 intent.setData(uri);
             }
-            cordova.getActivity().startActivity(intent);
+            cordova.getContext().startActivity(intent);
         } catch (android.content.ActivityNotFoundException e) {
             LOG.e(TAG, "Error loading url " + url, e);
         }
