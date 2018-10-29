@@ -41,6 +41,7 @@ import java.util.concurrent.Executors;
  */
 public class CordovaInterfaceImpl implements CordovaInterface {
     private static final String TAG = "CordovaInterfaceImpl";
+    protected Context context;
     protected Activity activity;
     protected ExecutorService threadPool;
     protected PluginManager pluginManager;
@@ -55,12 +56,12 @@ public class CordovaInterfaceImpl implements CordovaInterface {
 
     private Handler handler = new Handler(Looper.getMainLooper());
 
-    public CordovaInterfaceImpl(Activity activity) {
-        this(activity, Executors.newCachedThreadPool());
+    public CordovaInterfaceImpl(Context context) {
+        this(context, Executors.newCachedThreadPool());
     }
 
-    public CordovaInterfaceImpl(Activity activity, ExecutorService threadPool) {
-        this.activity = activity;
+    public CordovaInterfaceImpl(Context context, ExecutorService threadPool) {
+        this.context = context;
         this.threadPool = threadPool;
         this.permissionResultCallbacks = new CallbackMap();
     }
@@ -69,7 +70,9 @@ public class CordovaInterfaceImpl implements CordovaInterface {
     public void startActivityForResult(CordovaPlugin command, Intent intent, int requestCode) {
         setActivityResultCallback(command);
         try {
-            activity.startActivityForResult(intent, requestCode);
+            if (activity != null) {
+                activity.startActivityForResult(intent, requestCode);
+            }
         } catch (RuntimeException e) { // E.g.: ActivityNotFoundException
             activityResultCallback = null;
             throw e;
@@ -97,7 +100,7 @@ public class CordovaInterfaceImpl implements CordovaInterface {
 
     @Override
     public Context getContext() {
-        return activity;
+        return context;
     }
 
     @Override
