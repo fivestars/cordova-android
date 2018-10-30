@@ -184,7 +184,7 @@ public class CordovaWebViewImpl implements CordovaWebView {
         };
 
         final boolean _recreatePlugins = recreatePlugins;
-        cordova.getActivity().runOnUiThread(new Runnable() {
+        cordova.runOnUiThread(new Runnable() {
             public void run() {
                 if (loadUrlTimeoutValue > 0) {
                     cordova.getThreadPool().execute(timeoutCheck);
